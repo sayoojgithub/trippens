@@ -6,12 +6,12 @@ import mongoose from "mongoose"
 //import dotenv from "dotenv"
 import adminRoute from "./routes/adminRoute.js"
 import publicRoute from "./routes/publicRoute.js"
-import path from 'path'
-import { fileURLToPath } from "url";
+// import path from 'path'
+// import { fileURLToPath } from "url";
 
 // For ESM __dirname
-const __filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(__filename); // Fixed: removed asterisks
+// const __filename = fileURLToPath(import.meta.url);
+// const _dirname = path.dirname(__filename); // Fixed: removed asterisks
 
 dotenv.config()
 const app = express()
@@ -44,18 +44,18 @@ app.use('/api/v1/admin', adminRoute)
 app.use('/api/v1/public', publicRoute)
 
 // Production setup
-if (process.env.NODE_ENV === 'production') {
-    const parentDir = path.join(_dirname, '..'); // project root (../)
-    const distPath = path.join(parentDir, 'frontend', 'dist');
-    app.use(express.static(distPath));
+// if (process.env.NODE_ENV === 'production') {
+//     const parentDir = path.join(_dirname, '..'); // project root (../)
+//     const distPath = path.join(parentDir, 'frontend', 'dist');
+//     app.use(express.static(distPath));
     
-    // Fixed: Use wildcard (*) instead of regex pattern for Express 5.x
-    // app.get('*', (req, res) => {
-    //     res.sendFile(path.join(distPath, 'index.html'));
-    // });
-} else {
-    app.get('/', (req, res) => res.send('Server is Ready'));
-}
+//     // Fixed: Use wildcard (*) instead of regex pattern for Express 5.x
+//     // app.get('*', (req, res) => {
+//     //     res.sendFile(path.join(distPath, 'index.html'));
+//     // });
+// } else {
+//     app.get('/', (req, res) => res.send('Server is Ready'));
+// }
 
 app.listen(port, () => {
     connectDB();
